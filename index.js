@@ -10,7 +10,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 app.use(cors());
 app.use(express.json());
 
-// assignment
+
 // assignmentkJ558WassignmentMVE9M09NKP
 
 const uri = `mongodb+srv://${process.env.DB_user}:${process.env.DB_password}@cluster0.qoryues.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -53,6 +53,14 @@ const assignment10Data = client.db("assignment10DB").collection('locationData');
 // const userCollection = client.db("coffeeDB").collection('user');
 
 
+// post data from addLocation component
+app.post('/addLocation', async(req, res) => {
+    const location = req.body;
+    console.log(location);
+    const result = await assignment10Data.insertOne(location);
+    res.send(result);
+})
+//Read the posted data in server 
 
 
 
