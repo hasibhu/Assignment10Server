@@ -61,7 +61,12 @@ app.post('/addLocation', async(req, res) => {
     res.send(result);
 })
 //Read the posted data in server 
-
+app.get('/myLocation/:email', async (req, res) => {
+    // console.log(req.params.email);
+    const result = await  assignment10Data.find({ email: req.params.email }).toArray();
+    // console.log(result);
+    res.send(result)
+})
 
 
 
