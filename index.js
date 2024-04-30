@@ -2,15 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const app = express();
-require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+require("dotenv").config();
 
 
 //middleware 
 app.use(cors());
 app.use(express.json());
-
-
 
 const uri = `mongodb+srv://${process.env.DB_user}:${process.env.DB_password}@cluster0.qoryues.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
