@@ -137,7 +137,9 @@ app.get('/', async (req, res) => {
     res.send('The travel agency server is running..... ')
 })
 
+//Terminal observer 
 app.listen(port, () => {
+    
     console.log(`The server running on port: ${port}`)
 
 })
