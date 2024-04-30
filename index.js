@@ -111,15 +111,18 @@ app.put('/myLocation/:id', async (req, res) => {
     const options = { upsert: true };
     const updatedLocation = req.body;
     const locationUpdate = {
-        // $set: {
-        //     name: updatedLocation.name,
-        //     quantity: updatedLocation.quantity,
-        //     supplier: updatedLocation.supplier,
-        //     taste: updatedLocation.taste,
-        //     category: updatedLocation.category,
-        //     details: updatedLocation.details,
-        //     photo: updatedLocation.photo
-        // }
+        $set: {
+            touristSpotName: updatedLocation.touristSpotName,
+            countryName: updatedLocation.countryName,
+            locationName: updatedLocation.locationName,
+            numberOfVisitors: updatedLocation.numberOfVisitors,
+            cost: updatedLocation.cost,
+            image: updatedLocation.image,
+            season: updatedLocation.season,
+            travelDuaration: updatedLocation.travelDuaration,
+            description: updatedLocation.description,
+            userName: updatedLocation.userName
+        }
     };
 
     const result = await assignment10Data.updateOne(filter, locationUpdate, options);
