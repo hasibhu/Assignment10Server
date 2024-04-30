@@ -6,6 +6,7 @@ const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
+
 //middleware 
 app.use(cors());
 app.use(express.json());
@@ -21,19 +22,6 @@ const client = new MongoClient(uri, {
     }
 });
 
-// async function run() {
-//     try {
-//         // Connect the client to the server	(optional starting in v4.7)
-//         await client.connect();
-//         // Send a ping to confirm a successful connection
-//         await client.db("admin").command({ ping: 1 });
-//         console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//     } finally {
-//         // Ensures that the client will close when you finish/error
-//         await client.close();
-//     }
-// }
-// run().catch(console.dir);
 
 const dbConnect = async () => {
     try {
@@ -77,18 +65,7 @@ app.get('/myLocation/:email', async (req, res) => {
     res.send(result)
 })
 
-// app.get('/myLocation/:id', async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const query = { _id: new ObjectId(id) };
-//         const result = await assignment10Data.find(query).toArray();
-//         res.json(result);
-//     } catch (error) {
-//         console.error("Error retrieving data:", error);
-//         // Send a single error response with status code
-//         res.status(500).json({ error: "Failed to retrieve data" });
-//     }
-// });
+
 
 
 //country name specific data for italy 
@@ -104,10 +81,6 @@ app.get('/myLocation/', async (req, res) => {
         res.status(500).json({ error: "Failed to retrieve data" });
     }
 });
-
-
-
-
 
 
 //delete //delete
