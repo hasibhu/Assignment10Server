@@ -105,24 +105,24 @@ app.delete('/myLocation/:id', async (req, res) => {
 })
 
 // update 
-app.put('/coffee/:id', async (req, res) => {
+app.put('/myLocation/:id', async (req, res) => {
     const id = req.params.id;
     const filter = { _id: new ObjectId(id) };
     const options = { upsert: true };
-    const updatedCoffee = req.body;
-    const coffeeUpdate = {
-        $set: {
-            name: updatedCoffee.name,
-            quantity: updatedCoffee.quantity,
-            supplier: updatedCoffee.supplier,
-            taste: updatedCoffee.taste,
-            category: updatedCoffee.category,
-            details: updatedCoffee.details,
-            photo: updatedCoffee.photo
-        }
+    const updatedLocation = req.body;
+    const locationUpdate = {
+        // $set: {
+        //     name: updatedLocation.name,
+        //     quantity: updatedLocation.quantity,
+        //     supplier: updatedLocation.supplier,
+        //     taste: updatedLocation.taste,
+        //     category: updatedLocation.category,
+        //     details: updatedLocation.details,
+        //     photo: updatedLocation.photo
+        // }
     };
 
-    const result = await coffeeCollection.updateOne(filter, coffeeUpdate, options);
+    const result = await assignment10Data.updateOne(filter, locationUpdate, options);
     res.send(result);
 
 })
