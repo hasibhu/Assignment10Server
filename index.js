@@ -131,7 +131,7 @@ app.put('/myLocation/:id', async (req, res) => {
 })
 
 
-
+//Basic server function for web query
 app.get('/', async (req, res) => {
 
     res.send('The travel agency server is running..... ')
