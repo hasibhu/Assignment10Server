@@ -3,7 +3,7 @@ const cors = require('cors');
 const port = process.env.PORT || 3000;
 const app = express();
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 //middleware 
@@ -60,7 +60,19 @@ app.post('/addLocation', async(req, res) => {
     const result = await assignment10Data.insertOne(location);
     res.send(result);
 })
-//Read the posted data in server 
+
+// To read all server data 
+app.get('/myLocation/', async (req, res) => {
+    try {
+        const result = await assignment10Data.find({}).toArray();
+        res.json(result);
+    } catch (error) {
+        console.error("Error retrieving data:", error);
+        res.status(500).json({ error: "Failed to retrieve data" });
+    }
+});
+
+//Read the posted data in server at MyListPage
 app.get('/myLocation/:email', async (req, res) => {
     // console.log(req.params.email);
     const result = await  assignment10Data.find({ email: req.params.email }).toArray();
@@ -68,11 +80,52 @@ app.get('/myLocation/:email', async (req, res) => {
     res.send(result)
 })
 
+//country name specific data for italy 
+app.get('/myLocation/', async (req, res) => {
+    try {
+        const result = await assignment10Data.find({ countryName: "Italy" }).toArray();
+        console.log(result);
+        res.json(result);
+        
+    } catch (error) {
+        console.error("Error retrieving data:", error);
+        res.status(500).json({ error: "Failed to retrieve data" });
+    }
+});
 
 
 
+//delete //delete
+app.delete('/myLocation/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await assignment10Data.deleteOne(query);
+    res.send(result);
 
+})
 
+// update 
+app.put('/coffee/:id', async (req, res) => {
+    const id = req.params.id;
+    const filter = { _id: new ObjectId(id) };
+    const options = { upsert: true };
+    const updatedCoffee = req.body;
+    const coffeeUpdate = {
+        $set: {
+            name: updatedCoffee.name,
+            quantity: updatedCoffee.quantity,
+            supplier: updatedCoffee.supplier,
+            taste: updatedCoffee.taste,
+            category: updatedCoffee.category,
+            details: updatedCoffee.details,
+            photo: updatedCoffee.photo
+        }
+    };
+
+    const result = await coffeeCollection.updateOne(filter, coffeeUpdate, options);
+    res.send(result);
+
+})
 
 
 
